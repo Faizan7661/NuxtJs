@@ -1,5 +1,7 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  runtimeConfig:{
+    foodApiKey: process.env.API_URL
+  },
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   postcss: {
@@ -8,4 +10,5 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-})
+});
+  

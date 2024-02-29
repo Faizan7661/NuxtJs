@@ -18,6 +18,7 @@
    
    <script setup>
    import { ref, watch } from 'vue';
+   import { defineProps, defineEmits } from 'vue';
    
    // Props are automatically available in the template
    const props = defineProps({
@@ -42,6 +43,7 @@
        default: ''
     }
    });
+   const emit = defineEmits(['update:modelValue']);
    
    const inputValue = ref('');
    
