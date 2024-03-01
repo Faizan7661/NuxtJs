@@ -61,7 +61,7 @@ const searchInput = ref('');
 const recipes = ref([]);
 
 const searchRecipes = async () => {
-//  const apiKey = '1605e78e437a40b18d6ea7e4b36a9cde';
+ const apiKey = '1605e78e437a40b18d6ea7e4b36a9cde';
  const ingredient = searchInput.value;
  const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=16&includeIngredients=${ingredient}`;
 

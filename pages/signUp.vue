@@ -37,56 +37,24 @@
           Register
         </button>
       </form>
+      <br>
+    <p class="text-center">Already a User? <span class="text-blue-500 font-bold"><NuxtLink to="/login"> Login!</NuxtLink></span></p>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { useUserStore } from '../store/user'
+const userStore = useUserStore()
 
-const user = users();
 const name = ref("");
 const email = ref("");
 const password = ref("");
-const emailError = ref(false);
-const PasswordError = ref(false);
-const userExist = ref(false);
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const passwordRegex =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-const submitForm = () => {
-  if (
-    name.value.trim() !== "" &&
-    email.value.trim() !== "" &&
-    password.value.trim() !== ""
-  ) {
-    if (emailRegex.test(email.value) && passwordRegex.test(password.value)) {
-      const found = user.filter((x) => x.email === email.value);
-      if (found.length === 0) {
-        const user1 = {
-          id: user.length + 1,
-          name: name.value,
-          email: email.value,
-          password: password.value,
-          status: false,
-        };
-        user.push(user1);
-        alert("User registered successfully");
-        navigateTo("/login");
-      } else {
-        userExist.value = true;
-      }
-    } else {
-      emailError.value = !emailRegex.test(email.value);
-      PasswordError.value = !passwordRegex.test(password.value);
-    }
-  } else {
-    alert("Fill out every detail");
-    console.log("Name:", name.value);
-    console.log("Email:", email.value);
-    console.log("Password:", password.value);
+const submitForm = async () => {
+  const registered = await userStore.registerUser(name.value, email.value, password.value);
+  if (!registered) {
+    console.log('Registration failed');
   }
 };
 </script>

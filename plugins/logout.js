@@ -1,11 +1,14 @@
+import { useUserStore } from "~/store/user";
+
 export default defineNuxtPlugin((nuxtApp)=>{
+    const userStore = useUserStore()
     nuxtApp.logout=()=>{
-        const status=logInStatus();
-        status.value=false;
-        const userLogged=userLoggedIn();
-        userLogged.value="";
-        console.log( status.value+" "+userLogged.value)
-        if(status.value===false ){
+        let status = userStore.logInStatus
+        status=false;
+        let userLogged=userStore.userLoggedIn
+        userLogged="";
+        console.log( status+" "+userLogged)
+        if(status===false ){
             console.log("hiii")
             navigateTo("/login")
         }

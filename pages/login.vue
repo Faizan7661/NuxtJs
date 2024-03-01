@@ -29,41 +29,25 @@
           Log In
         </button>
       </form>
-      <div v-if="error" class="text-red-500 mt-4">
-        Invalid email or password. Please try again.
-      </div>
+      <br>
+    <p class="text-center">New to Recipe Finder? <span class="text-blue-500 font-bold"><NuxtLink to="/signUp">Create New Account!</NuxtLink></span></p>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref   } from "vue";
-import {userLoggedIn} from '../composables/state'
+import { useUserStore } from "~/store/user";
+const userStore = useUserStore()
 
-
-const user = users();
-const passUser = userLoggedIn()
-const logStatus = logInStatus();
 const email = ref('');
 const password = ref('');
-let userFound = ref(false);
-const error = ref(false);
 
 const login = async () => {
-  const userIndex = user.findIndex((x) => x.email === email.value);
-  if (userIndex !== -1 && user[userIndex].password === password.value) {
-    user.splice(userIndex, 1, { ...user[userIndex], status: true });
-    logStatus.value = true;
-    passUser.value = user[userIndex];
-    error.value = false;
-    userFound.value = true;
-
-    alert("user Logged In Successfully");
-    await navigateTo("/");
-
-    return;
-  }
-  error.value = !error.value; // toggle the value of error
+ const Login = await userStore.loginUser(email.value, password.value);
+ if (!Login) {
+  console.log('Login failed');
+ } 
 };
 
 </script>

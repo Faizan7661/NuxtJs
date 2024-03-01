@@ -50,10 +50,11 @@
 </template>
 
 <script setup>
- const user = userLoggedIn();
-  const currentUser = user.value;
-  const { logout } = useNuxtApp();
-  const logoutUser = () => {
-    logout();
-  };
+import { useUserStore } from '~/store/user';
+const userStore = useUserStore()
+const currentUser = userStore.userLoggedIn;
+const { logout } = useNuxtApp();
+const logoutUser = () => {
+  logout();
+};
 </script>

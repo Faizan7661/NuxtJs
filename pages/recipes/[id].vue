@@ -16,7 +16,7 @@ const recipe = ref(null);
 onMounted(async () => {
   try {
     const response = await fetch(
-      // `https://api.spoonacular.com/recipes/${id}/information?apiKey=1605e78e437a40b18d6ea7e4b36a9cde`
+      `https://api.spoonacular.com/recipes/${id}/information?apiKey=1605e78e437a40b18d6ea7e4b36a9cde`
     );
     const data = await response.json();
     recipe.value = {

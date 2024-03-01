@@ -1,6 +1,7 @@
 export default defineNuxtConfig({
-  runtimeConfig:{
-    foodApiKey: process.env.API_URL
+  modules: ['@pinia/nuxt'],
+  runtimeConfig: {
+    foodApiKey: process.env.API_KEY
   },
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
@@ -11,4 +12,3 @@ export default defineNuxtConfig({
     },
   },
 });
-  

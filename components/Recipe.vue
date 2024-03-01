@@ -43,6 +43,10 @@
            </div>
          </div>
          <hr class="border-black my-4">
+         <br>
+    
+         <p class="text-blue-500 font-bold bg-red-500 text-white text-center"><NuxtLink to="/recipes">GO BACK </NuxtLink></p>
+
        </div>
     </div>
    </template>
