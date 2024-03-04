@@ -29,7 +29,7 @@
             type="password"
             v-model="password"
           />
-        </div>
+          </div>
         <button
           type="submit"
           class="w-full bg-blue-500 text-white text-base p-3 rounded-md hover:bg-blue-600"

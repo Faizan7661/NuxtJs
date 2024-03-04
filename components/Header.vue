@@ -2,34 +2,21 @@
   <div>
     <nav class="relative px-4 py-4 flex justify-between items-center bg-white">
       <NuxtLink class="text-3xl font-bold leading-none" to="/">
-        <img class="h-14" src= "../assets/images/png-clipart-fruit-logo-food-recipe-business-seasoning-ingredients-natural-foods-dried-fruit-removebg-preview.png"
-        
-        alt="logo" />
+        <img class="h-14" src="../assets/images/png-clipart-fruit-logo-food-recipe-business-seasoning-ingredients-natural-foods-dried-fruit-removebg-preview.png" alt="logo" />
       </NuxtLink>
       <h1 class="text-2xl text-orange-300 font-bold">Finder</h1>
 
       <div class="lg:hidden">
-        <button class="navbar-burger flex items-center text-blue-600 p-3">
-          <svg
-            class="block h-4 w-4 fill-current"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+        <button class="navbar-burger flex items-center text-blue-600 p-3" @click="toggleMobileMenu">
+          <svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <title>Mobile menu</title>
             <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
           </svg>
         </button>
       </div>
-      <ul
-        class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6"
-      >
+      <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6" :class="{ 'flex flex-col space-y-4': isMobileMenuOpen }">
         <li>
-          <NuxtLink
-            class="text-sm text-black-400 hover:text-blue-500"
-            to="/"
-            exact-active-class="text-blue-600"
-            >Home</NuxtLink
-          >
+          <NuxtLink class="text-sm text-black-400 hover:text-blue-500" to="/" exact-active-class="text-blue-600">Home</NuxtLink>
         </li>
         <li class="text-gray-300">
           <svg
@@ -48,12 +35,7 @@
           </svg>
         </li>
         <li>
-          <NuxtLink
-            class="text-sm text-black-400 hover:text-blue-500"
-            to="/about"
-            exact-active-class="text-blue-600"
-            >About Us</NuxtLink
-          >
+          <NuxtLink class="text-sm text-black-400 hover:text-blue-500" to="/about" exact-active-class="text-blue-600">About Us</NuxtLink>
         </li>
         <li class="text-gray-300">
           <svg
@@ -73,38 +55,18 @@
         </li>
       
         <li>
-          <NuxtLink
-            class="text-sm text-black-400 hover:text-blue-500"
-            to="/recipes"
-            exact-active-class="text-blue-600"
-            >Recipes</NuxtLink
-          >
+          <NuxtLink class="text-sm text-black-400 hover:text-blue-500" to="/recipes" exact-active-class="text-blue-600">Recipes</NuxtLink>
         </li>
-        
-      </ul>
-      <NuxtLink
-        class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-blue-600 hover:bg-red-600 text-sm text-white font-bold rounded-xl transition duration-200"
-        to="/login"
-        >Sign In</NuxtLink
-      >
-      <NuxtLink
-        class="hidden lg:inline-block py-2 px-6 bg-green-600 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
-        to="/signUp"
-        >Sign up</NuxtLink
-      >
-      <NuxtLink
-        class="hidden lg:inline-block py-2 px-6 bg-red-600 ml-3 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
-        to="/userInfo"
-        >Account Info</NuxtLink
-      >
 
+      </ul>
+      <NuxtLink class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-blue-600 hover:bg-red-600 text-sm text-white font-bold rounded-xl transition duration-200" to="/login" v-show="!status || isMobileMenuOpen">Sign In</NuxtLink>
+      <NuxtLink class="hidden lg:inline-block py-2 px-6 bg-green-600 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" to="/signUp" v-show="!status || isMobileMenuOpen">Sign up</NuxtLink>
+      <NuxtLink class="hidden lg:inline-block py-2 px-6 bg-red-600 ml-3 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" to="/userInfo" v-show="status || isMobileMenuOpen">Account Info</NuxtLink>
     </nav>
-    <div class="navbar-menu relative z-50 hidden">
+    <div class="navbar-menu relative z-50" :class="{ 'hidden': !isMobileMenuOpen }">
       <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
-      <nav
-        class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto"
-      >
-        <div class="flex items-center mb-8">
+      <nav class="fixed top-0 right-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-l overflow-y-auto">
+      <div class="flex items-center mb-8">
           <NuxtLink class="mr-auto text-3xl font-bold leading-none" href="#">
             <svg class="h-12" alt="logo" viewBox="0 0 10240 10240">
               <path
@@ -113,74 +75,57 @@
               ></path>
             </svg>
           </NuxtLink>
-          <button class="navbar-close">
-            <svg
-              class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              ></path>
-            </svg>
-          </button>
+          <button class="navbar-close" @click="toggleMobileMenu">
+          <svg class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
         </div>
         <div>
           <ul>
             <li class="mb-1">
               <NuxtLink
                 class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                href="#"
+                to="/"
                 >Home</NuxtLink
               >
             </li>
             <li class="mb-1">
               <NuxtLink
                 class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                href="#"
+                to="/about"
                 >About Us</NuxtLink
               >
             </li>
             <li class="mb-1">
               <NuxtLink
                 class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                href="#"
-                >Services</NuxtLink
+                to="/recipes"
+                >Recipes</NuxtLink
               >
             </li>
-            <li class="mb-1">
-              <NuxtLink
-                class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                href="#"
-                >Pricing</NuxtLink
-              >
-            </li>
-            <li class="mb-1">
-              <NuxtLink
-                class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                href="#"
-                >Contact</NuxtLink
-              >
-            </li>
+            
           </ul>
         </div>
         <div class="mt-auto">
           <div class="pt-6">
             <NuxtLink
               class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
-              to=""
+              to="/signUp"
               >Sign in</NuxtLink
             >
             <NuxtLink
               class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700 rounded-xl"
-              to=""
-              >Sign Up</NuxtLink
+              to="/login"
+              >Login</NuxtLink
             >
+           
+              <NuxtLink
+                class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
+                to="/userInfo"
+                >Account Info</NuxtLink
+              >
+        
           </div>
           <p class="my-4 text-xs text-center text-gray-400">
             <span>Copyright © 2021</span>
@@ -193,7 +138,17 @@
 
 
 <script setup>
-  const user = userLoggedIn();
-  const u = user.value;
+
+import { ref } from 'vue';
+import { useUserStore } from '~/store/user';
+
+const userStore = useUserStore();
+const status = userStore.logInStatus;
+const isMobileMenuOpen = ref(false);
+
+const toggleMobileMenu = () => {
+ isMobileMenuOpen.value = !isMobileMenuOpen.value;
+};
+
   
 </script>
