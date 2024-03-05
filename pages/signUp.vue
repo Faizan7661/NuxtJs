@@ -29,6 +29,17 @@
             type="password"
             v-model="password"
           />
+          <br>
+          <div class="bg-white border border-gray-300 p-4 rounded-lg">
+  <p>For Password Use</p>
+  <ul>
+    <li>At least 1 Capital Letter</li>
+    <li>At least 1 Small Letter</li>
+    <li>At least 1 Special Character(!@#$%^&amp;*)</li>
+    <li>Minimum Length Should be 8 Characters</li>
+  </ul>
+</div>
+
           </div>
         <button
           type="submit"
